@@ -13,6 +13,14 @@ Core concepts of JavaScript Promises and asynchronous programming:
 - **Promise Chaining**: Chaining `.then()` blocks sequentially.
 - **Promise.all**: Handling multiple promises concurrently (in parallel).
 
+### 2. Template Tags (`/templateTags`)
+
+Advanced string manipulation using tagged template literals:
+
+- **Currency Formatter**: Automatically formatting numeric variables in a string.
+- **SQL Builder**: Preventing SQL injection by separating variables from queries.
+- **i18n Translator**: Extracting and replacing variables for dictionary translations.
+
 > Note: In the future, we will add more topics like Async/Await, Array Methods, and Closures!
 
 ## How to Run
