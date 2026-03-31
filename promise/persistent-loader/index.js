@@ -15,11 +15,14 @@ const unstableAPI = () =>
 
 function fetchWithRetry(taskFn, retries, delayMs) {
   return new Promise((resolve, reject) => {
+    let attemptCount = 0;
+
     const attempt = () => {
       taskFn()
         .then(resolve)
         .catch((e) => {
-          if (count < retries) {
+          if (attemptCount < retries) {
+            attemptCount++;
             setTimeout(attempt, delayMs);
           } else {
             reject(e);
