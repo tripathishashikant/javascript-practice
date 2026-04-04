@@ -1,0 +1,14 @@
+.app-shell {
+  width: min(1040px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.5rem 0 2.5rem;
+
+  &__header {
+    margin-bottom: 1rem;
+  }
+
+  &__body {
+    display: grid;
+    gap: 1rem;
+  }
+}

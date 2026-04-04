@@ -1,32 +1,68 @@
-# JavaScript Practice Repository
+# JavaScript Practice Lab
 
-This repository is created to practice all the core and advanced concepts of JavaScript. Its main purpose is to strengthen JavaScript foundations and problem-solving skills by building various programs.
+This repository started as a place to practice core JavaScript concepts through small exercises and is now being shaped into an interactive learning website.
 
-## Topics Covered
+The current direction is to build a Vue 3 + Vite + TypeScript practice lab where users can explore exercises, edit code in the browser, run examples, and reset back to the original state on reload.
 
-### 1. Promises (`/promise`)
+## Current Stack
 
-Core concepts of JavaScript Promises and asynchronous programming:
+- Vue 3
+- Vite
+- TypeScript
+- SCSS
+- SMACSS-style stylesheet structure
+- BEM naming conventions for UI modules
 
-- **Timer Delay**: Basic Promise creation and the use of `setTimeout`.
-- **Coin Toss**: Conditional resolve/reject and `Math.random()`.
-- **Promise Chaining**: Chaining `.then()` blocks sequentially.
-- **Promise.all**: Handling multiple promises concurrently (in parallel).
+## Project Goal
 
-### 2. Template Tags (`/templateTags`)
+The long-term goal is to create a JavaScript practice website that allows learners to:
 
-Advanced string manipulation using tagged template literals:
+- browse exercises by topic
+- read problem statements and examples
+- edit starter code in a playground
+- run code and inspect output
+- start fresh on reload without saving temporary edits
 
-- **Currency Formatter**: Automatically formatting numeric variables in a string.
-- **SQL Builder**: Preventing SQL injection by separating variables from queries.
-- **i18n Translator**: Extracting and replacing variables for dictionary translations.
+The intended visual direction is a glassmorphism-inspired interface.
 
-> Note: In the future, we will add more topics like Async/Await, Array Methods, and Closures!
+## Current Structure
 
-## How to Run
+```text
+src/
+  assets/styles/   # SCSS layers: base, layout, modules, state, theme
+  components/      # Reusable Vue UI components
+  data/            # Local structured exercise data
+  types/           # Shared TypeScript interfaces
+  views/           # Page-level Vue views
+```
 
-You can run any task in the terminal using Node.js. Example:
+## Development
+
+Install dependencies:
 
 ```bash
-node promise/timer-delay/index.js
+npm install
 ```
+
+Start the Vite development server:
+
+```bash
+npm run dev
+```
+
+Run a type check:
+
+```bash
+npx vue-tsc --noEmit
+```
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+## Notes
+
+- Existing JavaScript exercise content can be moved into `src` incrementally.
+- The architecture is intentionally being kept simple and learning-friendly while the playground experience is built out.

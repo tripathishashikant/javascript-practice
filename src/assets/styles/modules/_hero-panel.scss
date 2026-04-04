@@ -1,0 +1,31 @@
+@use '../theme/glass';
+
+.hero-panel {
+  @include glass.glass-panel;
+
+  padding: 1.4rem;
+  border-radius: 24px;
+
+  &__eyebrow {
+    display: inline-flex;
+    margin-bottom: 0.75rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(110, 231, 183, 0.1);
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    max-width: 10ch;
+    margin-bottom: 0.35rem;
+    font-size: clamp(2rem, 4vw, 3.6rem);
+  }
+
+  &__copy {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+}

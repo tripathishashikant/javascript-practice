@@ -14,3 +14,13 @@ Thumbs.db
 # Editor directories and files
 .vscode/
 .idea/
+
+# Generated Vue/TypeScript artifacts in src
+src/main.js
+src/main.js.map
+src/**/*.vue.js
+src/**/*.vue.js.map
+src/data/*.js
+src/data/*.js.map
+src/types/*.js
+src/types/*.js.map

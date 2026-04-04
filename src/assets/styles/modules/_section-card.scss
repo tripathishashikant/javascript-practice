@@ -1,0 +1,22 @@
+@use '../theme/glass';
+
+.section-card {
+  @include glass.glass-panel;
+
+  border-radius: 20px;
+  padding: 1.2rem;
+
+  &__header {
+    margin-bottom: 0.85rem;
+  }
+
+  &__title {
+    margin-bottom: 0.15rem;
+    font-size: 1.05rem;
+  }
+
+  &__copy {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+}

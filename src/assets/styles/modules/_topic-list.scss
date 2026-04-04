@@ -1,0 +1,28 @@
+.topic-list {
+  display: grid;
+  gap: 0.65rem;
+
+  &__item {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.85rem 0.9rem;
+    border: 1px solid rgba(110, 231, 183, 0.12);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &__meta {
+    width: fit-content;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(110, 231, 183, 0.1);
+    color: #b7f7d6;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-weight: 600;
+  }
+}
