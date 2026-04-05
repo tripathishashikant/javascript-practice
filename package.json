@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "repository": {
@@ -15,20 +15,20 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/tripathishashikant/practice-javascript/issues"
   },
   "homepage": "https://github.com/tripathishashikant/practice-javascript#readme",
   "dependencies": {
+    "lucide-vue-next": "^1.0.0",
+    "monaco-editor": "^0.55.1",
+    "pinia": "^3.0.4",
     "vue": "^3.5.32"
   },
   "devDependencies": {
-    "@types/node": "^25.5.2",
     "@vitejs/plugin-vue": "^6.0.5",
     "sass": "^1.99.0",
-    "typescript": "^6.0.2",
-    "vite": "^8.0.3",
-    "vue-tsc": "^3.2.6"
+    "vite": "^8.0.3"
   }
 }

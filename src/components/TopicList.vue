@@ -11,10 +11,11 @@
   </ul>
 </template>
 
-<script setup lang="ts">
-import type { ExerciseSummary } from '../types/exercise'
-
-defineProps<{
-  exercises: ExerciseSummary[]
-}>()
+<script setup>
+defineProps({
+  exercises: {
+    type: Array,
+    required: true,
+  },
+})
 </script>

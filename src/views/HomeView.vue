@@ -1,32 +1,71 @@
 <template>
-  <div class="app-shell">
-    <header class="app-shell__header">
-      <HeroPanel
-        eyebrow="JavaScript Lab"
-        title="Practice JavaScript"
-        copy="Vue 3 + TypeScript scaffold"
-      />
+  <section class="m-home">
+    <header class="m-home__hero">
+      <p class="m-home__eyebrow">Quantum Blue Terminal</p>
+      <h1 class="m-home__title">JS LAB</h1>
+      <p class="m-home__intro">
+        Monospaced JavaScript drills with zero decorative noise, direct problem statements,
+        and a session-only execution workspace.
+      </p>
     </header>
 
-    <div class="app-shell__body panel-grid">
-      <SectionCard
-        title="Topics"
-      >
-        <TopicList :exercises="exercises" />
-      </SectionCard>
+    <section class="m-home__panel">
+      <div class="m-home__panel-header">
+        <h2>Features</h2>
+        <p>Problem summaries are exposed as raw text streams for immediate scanning.</p>
+      </div>
 
-      <SectionCard
-        title="Status"
-      >
-        <p>Scaffold ready.</p>
-      </SectionCard>
-    </div>
-  </div>
+      <div class="m-home__feature-list">
+        <InteractiveCard
+          v-for="problem in featuredProblems"
+          :key="problem.id"
+          :title="problem.title"
+          :copy="problem.summary"
+          @select="store.openProblem(problem.id)"
+        >
+        </InteractiveCard>
+      </div>
+    </section>
+
+    <section class="m-home__panel">
+      <div class="m-home__panel-header">
+        <h2>Categories</h2>
+        <p>Geometric tokens replace decorative badges and keep difficulty legible.</p>
+      </div>
+
+      <div class="m-home__category-list">
+        <InteractiveCard
+          v-for="category in store.categories"
+          :key="category.id"
+          :title="category.title"
+          :copy="category.description"
+          @select="store.selectCategory(category.id)"
+        >
+          <template #leading>
+            <DifficultyToken :level="category.difficulty" />
+          </template>
+        </InteractiveCard>
+      </div>
+    </section>
+  </section>
 </template>
 
-<script setup lang="ts">
-import HeroPanel from '../components/HeroPanel.vue'
-import SectionCard from '../components/SectionCard.vue'
-import TopicList from '../components/TopicList.vue'
-import { exercises } from '../data/exercises'
+<script setup>
+import DifficultyToken from '@/components/DifficultyToken.vue'
+import InteractiveCard from '@/components/InteractiveCard.vue'
+import { useHead } from '@/composables/useHead'
+import { featuredProblems } from '@/data/exercises'
+import { useProblemStore } from '@/stores/problemStore'
+
+const store = useProblemStore()
+
+useHead({
+  title: 'JS LAB',
+  meta: [
+    {
+      name: 'description',
+      content: 'Practice JavaScript with a minimalist Quantum Blue Terminal interface.',
+    },
+  ],
+})
 </script>

@@ -11,10 +11,19 @@
   </section>
 </template>
 
-<script setup lang="ts">
-defineProps<{
-  eyebrow: string
-  title: string
-  copy?: string
-}>()
+<script setup>
+defineProps({
+  eyebrow: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  copy: {
+    type: String,
+    default: '',
+  },
+})
 </script>

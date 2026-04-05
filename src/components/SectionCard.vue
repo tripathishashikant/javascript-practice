@@ -14,9 +14,15 @@
   </section>
 </template>
 
-<script setup lang="ts">
-defineProps<{
-  title: string
-  copy?: string
-}>()
+<script setup>
+defineProps({
+  title: {
+    type: String,
+    required: true,
+  },
+  copy: {
+    type: String,
+    default: '',
+  },
+})
 </script>

@@ -1,0 +1,44 @@
+@use '../2-utils/variables' as *;
+
+.c-footer {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.c-footer__group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.c-footer__group:last-child {
+  justify-content: flex-end;
+}
+
+.c-footer__link,
+.c-footer__copyright {
+  color: $color-text-med;
+}
+
+.c-footer__link:hover {
+  color: $color-text-high;
+}
+
+.c-footer__copyright {
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .c-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .c-footer__group:last-child,
+  .c-footer__copyright {
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
