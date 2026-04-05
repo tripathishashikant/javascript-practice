@@ -1,36 +1,33 @@
 <template>
-  <div
-    ref="editorElement"
-    class="c-monaco-editor"
-  />
+  <div ref="editorElement" class="c-monaco-editor" />
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import * as monaco from 'monaco-editor'
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import * as monaco from 'monaco-editor';
+import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
 
 const props = defineProps({
   modelValue: {
     type: String,
     required: true,
   },
-})
+});
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue']);
 
-const editorElement = ref(null)
-let editor = null
+const editorElement = ref(null);
+let editor = null;
 
 self.MonacoEnvironment = {
   getWorker() {
-    return new editorWorker()
+    return new editorWorker();
   },
-}
+};
 
 onMounted(() => {
   if (!editorElement.value) {
-    return
+    return;
   }
 
   monaco.editor.defineTheme('quantum-blue-terminal', {
@@ -51,7 +48,7 @@ onMounted(() => {
       { token: 'number', foreground: 'FFFFFF' },
       { token: 'string', foreground: '6B99CC' },
     ],
-  })
+  });
 
   editor = monaco.editor.create(editorElement.value, {
     automaticLayout: true,
@@ -70,26 +67,26 @@ onMounted(() => {
       verticalScrollbarSize: 6,
     },
     theme: 'quantum-blue-terminal',
-  })
+  });
 
   editor.onDidChangeModelContent(() => {
-    emit('update:modelValue', editor?.getValue() ?? '')
-  })
-})
+    emit('update:modelValue', editor?.getValue() ?? '');
+  });
+});
 
 watch(
   () => props.modelValue,
   (value) => {
     if (!editor || editor.getValue() === value) {
-      return
+      return;
     }
 
-    editor.setValue(value)
+    editor.setValue(value);
   },
-)
+);
 
 onBeforeUnmount(() => {
-  editor?.getModel()?.dispose()
-  editor?.dispose()
-})
+  editor?.getModel()?.dispose();
+  editor?.dispose();
+});
 </script>

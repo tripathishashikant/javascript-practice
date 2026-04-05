@@ -12,8 +12,8 @@ and return an object with two properties:
 Example Expected Output:
 
 ```json
-{ 
-  query: "UPDATE users SET status = ? WHERE id = ?", 
-  values: ['active', 42] 
+{
+  "query": "UPDATE users SET status = ? WHERE id = ?",
+  "values": ["active", 42]
 }
 ```

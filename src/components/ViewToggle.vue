@@ -20,14 +20,14 @@
 </template>
 
 <script setup>
-import { Grid3x3, List } from 'lucide-vue-next'
+import { Grid3x3, List } from 'lucide-vue-next';
 
 defineProps({
   modelValue: {
     type: String,
     required: true,
   },
-})
+});
 
-defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue']);
 </script>

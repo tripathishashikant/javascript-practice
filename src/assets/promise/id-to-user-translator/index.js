@@ -15,6 +15,6 @@ function fetchAllUsers(ids) {
 
 // Expected Usage:
 fetchAllUsers(userIds).then((users) => {
-  console.log("All Users Data:", users);
+  console.log('All Users Data:', users);
   // Output: [{id: 101, name: "User_101"}, {id: 102, ...}, ...]
 });

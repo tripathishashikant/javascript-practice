@@ -4,8 +4,8 @@
       <p class="m-home__eyebrow">Quantum Blue Terminal</p>
       <h1 class="m-home__title">JS LAB</h1>
       <p class="m-home__intro">
-        Monospaced JavaScript drills with zero decorative noise, direct problem statements,
-        and a session-only execution workspace.
+        Monospaced JavaScript drills with zero decorative noise, direct problem statements, and a
+        session-only execution workspace.
       </p>
     </header>
 
@@ -51,13 +51,13 @@
 </template>
 
 <script setup>
-import DifficultyToken from '@/components/DifficultyToken.vue'
-import InteractiveCard from '@/components/InteractiveCard.vue'
-import { useHead } from '@/composables/useHead'
-import { featuredProblems } from '@/data/exercises'
-import { useProblemStore } from '@/stores/problemStore'
+import DifficultyToken from '@/components/DifficultyToken.vue';
+import InteractiveCard from '@/components/InteractiveCard.vue';
+import { useHead } from '@/composables/useHead';
+import { featuredProblems } from '@/data/exercises';
+import { useProblemStore } from '@/stores/problemStore';
 
-const store = useProblemStore()
+const store = useProblemStore();
 
 useHead({
   title: 'JS LAB',
@@ -67,5 +67,5 @@ useHead({
       content: 'Practice JavaScript with a minimalist Quantum Blue Terminal interface.',
     },
   ],
-})
+});
 </script>

@@ -1,4 +1,3 @@
-
 # Problem: HTML Sanitizer and Censor (XSS Protection)
 
 Create a tagged template function named `renderSafeHtml` that safely builds HTML strings.

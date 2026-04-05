@@ -7,9 +7,9 @@ const unstableAPI = () =>
     if (count < 3) {
       console.log(`Attempt ${count}: Failed...`);
 
-      rej("Server Error");
+      rej('Server Error');
     } else {
-      res("Success! Data received.");
+      res('Success! Data received.');
     }
   });
 

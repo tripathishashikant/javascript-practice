@@ -3,7 +3,7 @@ function sql(strings, ...values) {
 }
 
 const userId = 42;
-const status = "active";
+const status = 'active';
 
 // The mock query
 const result = sql`UPDATE users SET status = ${status} WHERE id = ${userId}`;

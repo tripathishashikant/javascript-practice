@@ -2,10 +2,7 @@
   <section class="section-card">
     <header class="section-card__header">
       <h2 class="section-card__title">{{ title }}</h2>
-      <p
-        v-if="copy"
-        class="section-card__copy"
-      >
+      <p v-if="copy" class="section-card__copy">
         {{ copy }}
       </p>
     </header>
@@ -24,5 +21,5 @@ defineProps({
     type: String,
     default: '',
   },
-})
+});
 </script>

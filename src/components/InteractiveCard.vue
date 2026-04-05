@@ -1,23 +1,13 @@
 <template>
-  <button
-    class="c-home-card"
-    type="button"
-    @click="$emit('select')"
-  >
-    <div
-      v-if="$slots.leading"
-      class="c-home-card__heading c-home-card__heading--with-leading"
-    >
+  <button class="c-home-card" type="button" @click="$emit('select')">
+    <div v-if="$slots.leading" class="c-home-card__heading c-home-card__heading--with-leading">
       <span class="c-home-card__leading">
         <slot name="leading" />
       </span>
       <span class="c-home-card__title">{{ title }}</span>
     </div>
 
-    <span
-      v-else
-      class="c-home-card__title"
-    >
+    <span v-else class="c-home-card__title">
       {{ title }}
     </span>
 
@@ -35,7 +25,7 @@ defineProps({
     type: String,
     required: true,
   },
-})
+});
 
-defineEmits(['select'])
+defineEmits(['select']);
 </script>

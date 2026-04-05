@@ -9,25 +9,25 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { Circle, Pentagon, Triangle } from 'lucide-vue-next'
+import { computed } from 'vue';
+import { Circle, Pentagon, Triangle } from 'lucide-vue-next';
 
 const props = defineProps({
   level: {
     type: String,
     required: true,
   },
-})
+});
 
 const icon = computed(() => {
   if (props.level === 'easy') {
-    return Circle
+    return Circle;
   }
 
   if (props.level === 'hard') {
-    return Pentagon
+    return Pentagon;
   }
 
-  return Triangle
-})
+  return Triangle;
+});
 </script>

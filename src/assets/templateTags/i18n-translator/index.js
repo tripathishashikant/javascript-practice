@@ -1,14 +1,13 @@
 const translations = {
-  "Hello, my name is {0} and I am {1} years old.":
-    "Hola, mi nombre es {0} y tengo {1} años.",
-  "Welcome back, {0}!": "¡Bienvenido de nuevo, {0}!",
+  'Hello, my name is {0} and I am {1} years old.': 'Hola, mi nombre es {0} y tengo {1} años.',
+  'Welcome back, {0}!': '¡Bienvenido de nuevo, {0}!',
 };
 
 function i18n(strings, ...values) {
   // Your code here
 }
 
-const name = "John";
+const name = 'John';
 const age = 30;
 
 const translatedMessage = i18n`Hello, my name is ${name} and I am ${age} years old.`;

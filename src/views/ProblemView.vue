@@ -1,8 +1,5 @@
 <template>
-  <section
-    v-if="problem"
-    class="m-problem-workspace"
-  >
+  <section v-if="problem" class="m-problem-workspace">
     <header class="m-problem-workspace__header">
       <div>
         <p class="m-problem-workspace__eyebrow">{{ problem.categoryId }}</p>
@@ -62,20 +59,13 @@
         <div class="m-problem-workspace__console">
           <div class="m-problem-workspace__console-header">
             <h3>Execution Console</h3>
-            <button
-              class="m-problem-workspace__run"
-              type="button"
-              @click="store.runCode"
-            >
+            <button class="m-problem-workspace__run" type="button" @click="store.runCode">
               RUN CODE
             </button>
           </div>
 
           <div class="m-problem-workspace__console-output">
-            <p
-              v-for="line in store.consoleOutput"
-              :key="line"
-            >
+            <p v-for="line in store.consoleOutput" :key="line">
               {{ line }}
             </p>
           </div>
@@ -86,13 +76,13 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import MonacoEditor from '@/components/MonacoEditor.vue'
-import { useHead } from '@/composables/useHead'
-import { useProblemStore } from '@/stores/problemStore'
+import { computed } from 'vue';
+import MonacoEditor from '@/components/MonacoEditor.vue';
+import { useHead } from '@/composables/useHead';
+import { useProblemStore } from '@/stores/problemStore';
 
-const store = useProblemStore()
-const problem = computed(() => store.activeProblem)
+const store = useProblemStore();
+const problem = computed(() => store.activeProblem);
 
 useHead(() => ({
   title: problem.value ? `Practice ${problem.value.title} - JS LAB` : 'Problem - JS LAB',
@@ -102,5 +92,5 @@ useHead(() => ({
       content: problem.value?.summary ?? 'Practice JavaScript problems in JS LAB.',
     },
   ],
-}))
+}));
 </script>

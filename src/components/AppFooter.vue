@@ -1,18 +1,10 @@
 <template>
   <footer class="c-footer">
     <div class="c-footer__group">
-      <button
-        class="c-footer__link"
-        type="button"
-        @click="store.setActiveView('home')"
-      >
+      <button class="c-footer__link" type="button" @click="store.setActiveView('home')">
         Problems
       </button>
-      <button
-        class="c-footer__link"
-        type="button"
-        @click="store.setActiveView('concept')"
-      >
+      <button class="c-footer__link" type="button" @click="store.setActiveView('concept')">
         Concept
       </button>
       <a
@@ -23,12 +15,7 @@
       >
         GitHub
       </a>
-      <a
-        class="c-footer__link"
-        href="https://www.linkedin.com"
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a class="c-footer__link" href="https://www.linkedin.com" target="_blank" rel="noreferrer">
         LinkedIn
       </a>
     </div>
@@ -44,12 +31,7 @@
       >
         MDN Web Docs
       </a>
-      <a
-        class="c-footer__link"
-        href="https://javascript.info"
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a class="c-footer__link" href="https://javascript.info" target="_blank" rel="noreferrer">
         JavaScript.info
       </a>
     </div>
@@ -57,8 +39,8 @@
 </template>
 
 <script setup>
-import { useProblemStore } from '@/stores/problemStore'
+import { useProblemStore } from '@/stores/problemStore';
 
-const store = useProblemStore()
-const currentYear = new Date().getFullYear()
+const store = useProblemStore();
+const currentYear = new Date().getFullYear();
 </script>

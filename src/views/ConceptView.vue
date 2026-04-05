@@ -9,16 +9,10 @@
     </header>
 
     <div class="m-concept__toggle">
-      <ViewToggle
-        :model-value="store.displayMode"
-        @update:model-value="store.setDisplayMode"
-      />
+      <ViewToggle :model-value="store.displayMode" @update:model-value="store.setDisplayMode" />
     </div>
 
-    <div
-      class="m-concept__list"
-      :class="{ 'is-grid': store.displayMode === 'grid' }"
-    >
+    <div class="m-concept__list" :class="{ 'is-grid': store.displayMode === 'grid' }">
       <button
         v-for="problem in problems"
         :key="problem.id"
@@ -41,15 +35,15 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import DifficultyToken from '@/components/DifficultyToken.vue'
-import ViewToggle from '@/components/ViewToggle.vue'
-import { useHead } from '@/composables/useHead'
-import { useProblemStore } from '@/stores/problemStore'
+import { computed } from 'vue';
+import DifficultyToken from '@/components/DifficultyToken.vue';
+import ViewToggle from '@/components/ViewToggle.vue';
+import { useHead } from '@/composables/useHead';
+import { useProblemStore } from '@/stores/problemStore';
 
-const store = useProblemStore()
+const store = useProblemStore();
 
-const problems = computed(() => store.selectedCategory?.problems ?? [])
+const problems = computed(() => store.selectedCategory?.problems ?? []);
 
 useHead({
   title: 'Concepts - JS LAB',
@@ -59,5 +53,5 @@ useHead({
       content: 'Browse JavaScript concepts with clean list and grid modes.',
     },
   ],
-})
+});
 </script>

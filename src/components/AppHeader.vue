@@ -1,10 +1,6 @@
 <template>
   <header class="c-header">
-    <button
-      class="c-header__brand"
-      type="button"
-      @click="store.setActiveView('home')"
-    >
+    <button class="c-header__brand" type="button" @click="store.setActiveView('home')">
       JavaScriptLAB
     </button>
 
@@ -34,12 +30,7 @@
         <Github :size="16" />
         <span>GitHub</span>
       </a>
-      <a
-        class="c-header__link"
-        href="https://www.linkedin.com"
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a class="c-header__link" href="https://www.linkedin.com" target="_blank" rel="noreferrer">
         <Linkedin :size="16" />
         <span>LinkedIn</span>
       </a>
@@ -48,8 +39,8 @@
 </template>
 
 <script setup>
-import { Github, Linkedin } from 'lucide-vue-next'
-import { useProblemStore } from '@/stores/problemStore'
+import { Github, Linkedin } from 'lucide-vue-next';
+import { useProblemStore } from '@/stores/problemStore';
 
-const store = useProblemStore()
+const store = useProblemStore();
 </script>

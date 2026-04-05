@@ -13,12 +13,12 @@
 </template>
 
 <script setup>
-import AppFooter from '@/components/AppFooter.vue'
-import AppHeader from '@/components/AppHeader.vue'
-import { useProblemStore } from '@/stores/problemStore'
-import ConceptView from '@/views/ConceptView.vue'
-import HomeView from '@/views/HomeView.vue'
-import ProblemView from '@/views/ProblemView.vue'
+import AppFooter from '@/components/AppFooter.vue';
+import AppHeader from '@/components/AppHeader.vue';
+import { useProblemStore } from '@/stores/problemStore';
+import ConceptView from '@/views/ConceptView.vue';
+import HomeView from '@/views/HomeView.vue';
+import ProblemView from '@/views/ProblemView.vue';
 
-const store = useProblemStore()
+const store = useProblemStore();
 </script>
