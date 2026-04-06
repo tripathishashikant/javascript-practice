@@ -21,7 +21,7 @@
           :key="problem.id"
           :title="problem.title"
           :copy="problem.summary"
-          @select="store.openProblem(problem.id)"
+          @select="openProblem(problem.id)"
         >
         </InteractiveCard>
       </div>
@@ -39,7 +39,7 @@
           :key="category.id"
           :title="category.title"
           :copy="category.description"
-          @select="store.selectCategory(category.id)"
+          @select="openCategory(category.id)"
         >
           <template #leading>
             <DifficultyToken :level="category.difficulty" />
@@ -51,6 +51,7 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 import DifficultyToken from '@/components/DifficultyToken.vue';
 import InteractiveCard from '@/components/InteractiveCard.vue';
 import { useHead } from '@/composables/useHead';
@@ -58,6 +59,17 @@ import { featuredProblems } from '@/data/exercises';
 import { useProblemStore } from '@/stores/problemStore';
 
 const store = useProblemStore();
+const router = useRouter();
+
+function openProblem(problemId) {
+  store.openProblem(problemId);
+  router.push({ name: 'problem', params: { problemId } });
+}
+
+function openCategory(categoryId) {
+  store.selectCategory(categoryId);
+  router.push({ name: 'concept', params: { categoryId } });
+}
 
 useHead({
   title: 'JS LAB',

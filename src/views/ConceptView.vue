@@ -18,7 +18,7 @@
         :key="problem.id"
         class="m-concept__item"
         type="button"
-        @click="store.openProblem(problem.id)"
+        @click="router.push({ name: 'problem', params: { problemId: problem.id } })"
       >
         <div class="m-concept__item-top">
           <div class="m-concept__item-title">
@@ -35,15 +35,35 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, watchEffect } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import DifficultyToken from '@/components/DifficultyToken.vue';
 import ViewToggle from '@/components/ViewToggle.vue';
 import { useHead } from '@/composables/useHead';
 import { useProblemStore } from '@/stores/problemStore';
 
 const store = useProblemStore();
+const route = useRoute();
+const router = useRouter();
 
 const problems = computed(() => store.selectedCategory?.problems ?? []);
+
+watchEffect(() => {
+  const categoryId = typeof route.params.categoryId === 'string' ? route.params.categoryId : '';
+
+  if (!categoryId) {
+    const fallbackId = store.categories[0]?.id;
+
+    if (fallbackId) {
+      router.replace({ name: 'concept', params: { categoryId: fallbackId } });
+    }
+    return;
+  }
+
+  if (categoryId !== store.selectedCategory?.id) {
+    store.selectCategory(categoryId);
+  }
+});
 
 useHead({
   title: 'Concepts - JS LAB',

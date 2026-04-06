@@ -1,26 +1,14 @@
 <template>
   <header class="c-header">
-    <button class="c-header__brand" type="button" @click="store.setActiveView('home')">
-      JavaScriptLAB
-    </button>
+    <RouterLink class="c-header__brand" :to="{ name: 'home' }">JavaScriptLAB</RouterLink>
 
     <nav class="c-header__nav">
-      <button
-        class="c-header__link"
-        :class="{ 'is-active': store.activeView === 'home' }"
-        type="button"
-        @click="store.setActiveView('home')"
-      >
+      <RouterLink class="c-header__link" :to="{ name: 'home' }" exact-active-class="is-active">
         Problems
-      </button>
-      <button
-        class="c-header__link"
-        :class="{ 'is-active': store.activeView === 'concept' }"
-        type="button"
-        @click="store.setActiveView('concept')"
-      >
+      </RouterLink>
+      <RouterLink class="c-header__link" :to="{ name: 'concept' }" active-class="is-active">
         Concept
-      </button>
+      </RouterLink>
       <a
         class="c-header__link"
         href="https://github.com/tripathishashikant/practice-javascript"
@@ -39,8 +27,6 @@
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { Github, Linkedin } from 'lucide-vue-next';
-import { useProblemStore } from '@/stores/problemStore';
-
-const store = useProblemStore();
 </script>

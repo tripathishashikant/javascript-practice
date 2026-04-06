@@ -7,17 +7,29 @@
         <p class="m-problem-workspace__summary">{{ problem.summary }}</p>
       </div>
 
-      <button
-        class="m-problem-workspace__back"
-        type="button"
-        @click="store.setActiveView('concept')"
-      >
-        Return to Concept
-      </button>
+      <div class="m-problem-workspace__actions">
+        <RouterLink
+          class="m-problem-workspace__back"
+          :to="{ name: 'concept', params: { categoryId: problem.categoryId } }"
+        >
+          <ArrowLeft :size="16" />
+          <span>Return to Concept</span>
+        </RouterLink>
+
+        <button
+          class="m-problem-workspace__toggle"
+          type="button"
+          :aria-label="isExplanationVisible ? 'Hide explanation' : 'Show explanation'"
+          @click="isExplanationVisible = !isExplanationVisible"
+        >
+          <EyeOff v-if="isExplanationVisible" :size="16" />
+          <Eye v-else :size="16" />
+        </button>
+      </div>
     </header>
 
     <div class="m-problem-workspace__grid">
-      <section class="m-problem-workspace__panel">
+      <section v-if="isExplanationVisible" class="m-problem-workspace__panel">
         <h2>Explanation</h2>
         <p>{{ problem.description }}</p>
 
@@ -76,13 +88,34 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
+import { onBeforeRouteLeave, RouterLink, useRoute } from 'vue-router';
+import { ArrowLeft, Eye, EyeOff } from 'lucide-vue-next';
 import MonacoEditor from '@/components/MonacoEditor.vue';
 import { useHead } from '@/composables/useHead';
 import { useProblemStore } from '@/stores/problemStore';
 
 const store = useProblemStore();
+const route = useRoute();
 const problem = computed(() => store.activeProblem);
+const isExplanationVisible = ref(true);
+
+watchEffect(() => {
+  const problemId = typeof route.params.problemId === 'string' ? route.params.problemId : '';
+
+  if (!problemId) {
+    return;
+  }
+
+  if (problemId !== store.activeProblem?.id) {
+    store.openProblem(problemId);
+  }
+});
+
+onBeforeRouteLeave((_to, _from, next) => {
+  store.resetEditor();
+  next();
+});
 
 useHead(() => ({
   title: problem.value ? `Practice ${problem.value.title} - JS LAB` : 'Problem - JS LAB',

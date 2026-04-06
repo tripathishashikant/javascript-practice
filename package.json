@@ -7,8 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint src vite.config.js eslint.config.js",
+    "lint:fix": "eslint src vite.config.js eslint.config.js --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -26,9 +26,10 @@
   "homepage": "https://github.com/tripathishashikant/practice-javascript#readme",
   "dependencies": {
     "lucide-vue-next": "^1.0.0",
-    "monaco-editor": "^0.55.1",
+    "monaco-editor": "^0.53.0",
     "pinia": "^3.0.4",
-    "vue": "^3.5.32"
+    "vue": "^3.5.32",
+    "vue-router": "^5.0.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

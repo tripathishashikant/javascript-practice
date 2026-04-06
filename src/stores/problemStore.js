@@ -13,7 +13,6 @@ function formatConsoleValue(value) {
   }
 }
 export const useProblemStore = defineStore('problemStore', () => {
-  const activeView = ref('home');
   const displayMode = ref('list');
   const selectedCategoryId = ref(categories[0]?.id ?? '');
   const activeProblemId = ref(categories[0]?.problems[0]?.id ?? '');
@@ -37,12 +36,6 @@ export const useProblemStore = defineStore('problemStore', () => {
       '[Log]: Session-only editor state restored to starter code.',
     ];
   }
-  function setActiveView(view) {
-    if (view !== 'problem') {
-      resetEditor();
-    }
-    activeView.value = view;
-  }
   function setDisplayMode(mode) {
     displayMode.value = mode;
   }
@@ -55,7 +48,6 @@ export const useProblemStore = defineStore('problemStore', () => {
     selectedCategoryId.value = categoryId;
     activeProblemId.value = category.problems[0]?.id ?? '';
     resetEditor(category.problems[0]);
-    activeView.value = 'concept';
   }
   function openProblem(problemId) {
     const problem = allProblems.value.find((item) => item.id === problemId);
@@ -65,7 +57,6 @@ export const useProblemStore = defineStore('problemStore', () => {
     }
     selectedCategoryId.value = problem.categoryId;
     activeProblemId.value = problemId;
-    activeView.value = 'problem';
     resetEditor(problem);
   }
   function updateEditorCode(nextValue) {
@@ -96,14 +87,13 @@ export const useProblemStore = defineStore('problemStore', () => {
     }
   }
   return {
-    activeView,
     activeProblem,
     categories,
     consoleOutput,
     displayMode,
     editorCode,
+    resetEditor,
     selectedCategory,
-    setActiveView,
     setDisplayMode,
     selectCategory,
     openProblem,

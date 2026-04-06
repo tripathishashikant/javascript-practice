@@ -3,9 +3,7 @@
     <AppHeader />
 
     <main class="l-app-shell__main">
-      <HomeView v-if="store.activeView === 'home'" />
-      <ConceptView v-else-if="store.activeView === 'concept'" />
-      <ProblemView v-else />
+      <RouterView />
     </main>
 
     <AppFooter />
@@ -13,12 +11,7 @@
 </template>
 
 <script setup>
+import { RouterView } from 'vue-router';
 import AppFooter from '@/components/AppFooter.vue';
 import AppHeader from '@/components/AppHeader.vue';
-import { useProblemStore } from '@/stores/problemStore';
-import ConceptView from '@/views/ConceptView.vue';
-import HomeView from '@/views/HomeView.vue';
-import ProblemView from '@/views/ProblemView.vue';
-
-const store = useProblemStore();
 </script>

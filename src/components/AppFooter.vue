@@ -1,12 +1,8 @@
 <template>
   <footer class="c-footer">
     <div class="c-footer__group">
-      <button class="c-footer__link" type="button" @click="store.setActiveView('home')">
-        Problems
-      </button>
-      <button class="c-footer__link" type="button" @click="store.setActiveView('concept')">
-        Concept
-      </button>
+      <RouterLink class="c-footer__link" :to="{ name: 'home' }">Problems</RouterLink>
+      <RouterLink class="c-footer__link" :to="{ name: 'concept' }">Concept</RouterLink>
       <a
         class="c-footer__link"
         href="https://github.com/tripathishashikant/practice-javascript"
@@ -39,8 +35,7 @@
 </template>
 
 <script setup>
-import { useProblemStore } from '@/stores/problemStore';
+import { RouterLink } from 'vue-router';
 
-const store = useProblemStore();
 const currentYear = new Date().getFullYear();
 </script>

@@ -71,21 +71,37 @@
   font-size: 0.95rem;
 }
 
-.m-home__feature-list,
-.m-home__category-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+.m-home__feature-list {
+  display: grid;
+  gap: 0;
+  justify-items: center;
   overflow: hidden;
 }
 
+.m-home__category-list {
+  display: grid;
+  gap: 0;
+  justify-items: center;
+  overflow: hidden;
+}
+
+.m-home__feature-list .c-home-card,
+.m-home__category-list .c-home-card {
+  width: min(100%, 72ch);
+  justify-items: start;
+  text-align: left;
+}
+
+.m-home__feature-list .c-home-card__heading,
+.m-home__category-list .c-home-card__heading {
+  justify-content: flex-start;
+}
+
 .c-home-card {
-  flex: 0 1 24rem;
   position: relative;
   display: grid;
   gap: 0.65rem;
-  width: 24rem;
+  width: 100%;
   padding: 1rem 0;
   justify-items: center;
   text-align: center;
