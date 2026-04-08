@@ -31,7 +31,7 @@
     <div class="m-problem-workspace__grid">
       <section v-if="isExplanationVisible" class="m-problem-workspace__panel">
         <h2>Explanation</h2>
-        <p>{{ problem.description }}</p>
+        <pre class="m-problem-workspace__statement">{{ problem.description }}</pre>
 
         <div class="m-problem-workspace__stream">
           <h3>Examples</h3>
@@ -71,9 +71,20 @@
         <div class="m-problem-workspace__console">
           <div class="m-problem-workspace__console-header">
             <h3>Execution Console</h3>
-            <button class="m-problem-workspace__run" type="button" @click="store.runCode">
-              RUN CODE
-            </button>
+            <div class="m-problem-workspace__console-actions">
+              <button
+                class="m-problem-workspace__solution"
+                type="button"
+                :disabled="!problem.solutionCode"
+                @click="store.loadSolution(problem)"
+              >
+                <FileDown :size="16" />
+                <span>LOAD SOLUTION</span>
+              </button>
+              <button class="m-problem-workspace__run" type="button" @click="store.runCode">
+                RUN CODE
+              </button>
+            </div>
           </div>
 
           <div class="m-problem-workspace__console-output">
@@ -90,7 +101,7 @@
 <script setup>
 import { computed, ref, watchEffect } from 'vue';
 import { onBeforeRouteLeave, RouterLink, useRoute } from 'vue-router';
-import { ArrowLeft, Eye, EyeOff } from 'lucide-vue-next';
+import { ArrowLeft, Eye, EyeOff, FileDown } from 'lucide-vue-next';
 import MonacoEditor from '@/components/MonacoEditor.vue';
 import { useHead } from '@/composables/useHead';
 import { useProblemStore } from '@/stores/problemStore';

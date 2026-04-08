@@ -1,8 +1,5 @@
 function sql(strings, ...values) {
-  return {
-    query: strings.join('?'),
-    values,
-  };
+  // Your code here
 }
 
 const userId = 42;
