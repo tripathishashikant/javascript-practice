@@ -17,6 +17,7 @@ export const useProblemStore = defineStore('problemStore', () => {
   const selectedCategoryId = ref(categories[0]?.id ?? '');
   const activeProblemId = ref(categories[0]?.problems[0]?.id ?? '');
   const editorCode = ref(categories[0]?.problems[0]?.starterCode ?? '');
+  const editorPreset = ref('starter');
   const activeRunId = ref(0);
   const consoleOutput = ref([
     'Console ready.',
@@ -32,6 +33,7 @@ export const useProblemStore = defineStore('problemStore', () => {
 
   function resetEditor(problem = activeProblem.value) {
     activeRunId.value += 1;
+    editorPreset.value = 'starter';
     editorCode.value = problem?.starterCode ?? '';
     consoleOutput.value = [
       'Console ready.',
@@ -67,7 +69,9 @@ export const useProblemStore = defineStore('problemStore', () => {
 
   function loadSolution(problem = activeProblem.value) {
     activeRunId.value += 1;
+    editorPreset.value = 'solution';
     if (!problem?.solutionCode) {
+      editorPreset.value = 'starter';
       consoleOutput.value = ['[Log]: No solution is available for this problem yet.'];
       return;
     }
@@ -75,14 +79,30 @@ export const useProblemStore = defineStore('problemStore', () => {
     editorCode.value = problem.solutionCode;
     consoleOutput.value = ['[Log]: Solution loaded into the editor.'];
   }
+
+  function toggleSolution(problem = activeProblem.value) {
+    if (editorPreset.value === 'solution') {
+      resetEditor(problem);
+      return;
+    }
+
+    loadSolution(problem);
+  }
   async function runCode() {
     activeRunId.value += 1;
     const runId = activeRunId.value;
     const logs = [];
+    const asyncGraceMs = 3500;
+    let noOutputTimerId = null;
 
     const pushLine = (prefix, args) => {
       if (activeRunId.value !== runId) {
         return;
+      }
+
+      if (noOutputTimerId) {
+        clearTimeout(noOutputTimerId);
+        noOutputTimerId = null;
       }
 
       logs.push(`${prefix}${args.map(formatConsoleValue).join(' ')}`);
@@ -106,25 +126,35 @@ export const useProblemStore = defineStore('problemStore', () => {
 
       await runner(virtualConsole);
 
-      // If the user code schedules async work (timeouts, un-awaited promises),
-      // logs may arrive after the runner finishes. Keep the console live and
-      // show a helpful message if nothing arrived shortly after completion.
-      setTimeout(() => {
-        if (activeRunId.value !== runId) {
-          return;
-        }
+      if (activeRunId.value !== runId) {
+        return;
+      }
 
-        if (logs.length === 0) {
-          consoleOutput.value = [
-            '[Log]: Execution completed. No console output yet.',
-            '[Tip]: If your code is async, use await (e.g. await somePromise) to see output during the run.',
-          ];
-        }
-      }, 50);
+      // If the user code schedules async work (timeouts, un-awaited promises),
+      // logs can arrive after the runner finishes. Keep "Running..." for a
+      // short grace window to avoid flashing a misleading "no output" warning.
+      if (logs.length === 0) {
+        noOutputTimerId = setTimeout(() => {
+          if (activeRunId.value !== runId) {
+            return;
+          }
+
+          if (logs.length === 0) {
+            consoleOutput.value = [
+              '[Log]: Execution completed with no console output.',
+              '[Tip]: If you expected delayed output, make sure your async work is awaited (or log immediately).',
+            ];
+          }
+        }, asyncGraceMs);
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
 
       if (activeRunId.value === runId) {
+        if (noOutputTimerId) {
+          clearTimeout(noOutputTimerId);
+        }
+
         consoleOutput.value = [`[Error]: ${message}`];
       }
     }
@@ -135,7 +165,9 @@ export const useProblemStore = defineStore('problemStore', () => {
     consoleOutput,
     displayMode,
     editorCode,
+    editorPreset,
     loadSolution,
+    toggleSolution,
     resetEditor,
     selectedCategory,
     setDisplayMode,

@@ -75,11 +75,12 @@
               <button
                 class="m-problem-workspace__solution"
                 type="button"
-                :disabled="!problem.solutionCode"
-                @click="store.loadSolution(problem)"
+                :disabled="!problem.solutionCode && !isSolutionLoaded"
+                @click="store.toggleSolution(problem)"
               >
-                <FileDown :size="16" />
-                <span>LOAD SOLUTION</span>
+                <RotateCcw v-if="isSolutionLoaded" :size="16" />
+                <FileDown v-else :size="16" />
+                <span>{{ isSolutionLoaded ? 'RESTORE STARTER' : 'LOAD SOLUTION' }}</span>
               </button>
               <button class="m-problem-workspace__run" type="button" @click="store.runCode">
                 RUN CODE
@@ -101,7 +102,7 @@
 <script setup>
 import { computed, ref, watchEffect } from 'vue';
 import { onBeforeRouteLeave, RouterLink, useRoute } from 'vue-router';
-import { ArrowLeft, Eye, EyeOff, FileDown } from 'lucide-vue-next';
+import { ArrowLeft, Eye, EyeOff, FileDown, RotateCcw } from 'lucide-vue-next';
 import MonacoEditor from '@/components/MonacoEditor.vue';
 import { useHead } from '@/composables/useHead';
 import { useProblemStore } from '@/stores/problemStore';
@@ -109,6 +110,7 @@ import { useProblemStore } from '@/stores/problemStore';
 const store = useProblemStore();
 const route = useRoute();
 const problem = computed(() => store.activeProblem);
+const isSolutionLoaded = computed(() => store.editorPreset === 'solution');
 const isExplanationVisible = ref(true);
 
 watchEffect(() => {

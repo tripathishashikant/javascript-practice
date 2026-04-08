@@ -1,11 +1,24 @@
+@use '@/assets/styles/utils/variables' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  font-size: 62.5%;
+  background: $color-bg-page;
+}
+
 body {
   min-width: 320px;
-  background:
-    radial-gradient(circle at top left, rgba(74, 222, 128, 0.2), transparent 34%),
-    radial-gradient(circle at top right, rgba(16, 185, 129, 0.18), transparent 30%),
-    radial-gradient(circle at bottom left, rgba(110, 231, 183, 0.12), transparent 28%),
-    linear-gradient(160deg, var(--color-bg-start), var(--color-bg-end));
-  color: var(--color-text);
+  background: $color-bg-page;
+  color: $color-text-med;
+  font-family: $font-mono;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 a {
@@ -15,6 +28,11 @@ a {
 
 button {
   border: 0;
-  background: none;
+  background: transparent;
   color: inherit;
+  cursor: pointer;
+}
+
+#app {
+  isolation: isolate;
 }

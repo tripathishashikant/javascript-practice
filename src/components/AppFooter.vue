@@ -13,9 +13,11 @@
         target="_blank"
         rel="noreferrer"
       >
+        <BookOpen :size="16" />
         MDN Web Docs
       </a>
       <a class="c-footer__link" href="https://javascript.info" target="_blank" rel="noreferrer">
+        <Code :size="16" />
         JavaScript.info
       </a>
     </div>
@@ -24,6 +26,7 @@
 
 <script setup>
 import PrimaryNav from '@/components/PrimaryNav.vue';
+import { BookOpen, Code } from 'lucide-vue-next';
 
 const currentYear = new Date().getFullYear();
 </script>

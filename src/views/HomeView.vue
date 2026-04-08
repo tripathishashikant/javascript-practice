@@ -9,44 +9,46 @@
       </p>
     </header>
 
-    <section class="m-home__panel">
-      <div class="m-home__panel-header">
-        <h2>Features</h2>
-        <p>Problem summaries are exposed as raw text streams for immediate scanning.</p>
-      </div>
+    <div class="m-home__duo">
+      <section class="m-home__panel">
+        <div class="m-home__panel-header">
+          <h2>Features</h2>
+          <p>Problem summaries are exposed as raw text streams for immediate scanning.</p>
+        </div>
 
-      <div class="m-home__feature-list">
-        <InteractiveCard
-          v-for="problem in featuredProblems"
-          :key="problem.id"
-          :title="problem.title"
-          :copy="problem.summary"
-          @select="openProblem(problem.id)"
-        >
-        </InteractiveCard>
-      </div>
-    </section>
+        <div class="m-home__feature-list">
+          <InteractiveCard
+            v-for="problem in featuredProblems"
+            :key="problem.id"
+            :title="problem.title"
+            :copy="problem.summary"
+            @select="openProblem(problem.id)"
+          >
+          </InteractiveCard>
+        </div>
+      </section>
 
-    <section class="m-home__panel">
-      <div class="m-home__panel-header">
-        <h2>Categories</h2>
-        <p>Geometric tokens replace decorative badges and keep difficulty legible.</p>
-      </div>
+      <section class="m-home__panel">
+        <div class="m-home__panel-header">
+          <h2>Categories</h2>
+          <p>Geometric tokens replace decorative badges and keep difficulty legible.</p>
+        </div>
 
-      <div class="m-home__category-list">
-        <InteractiveCard
-          v-for="category in store.categories"
-          :key="category.id"
-          :title="category.title"
-          :copy="category.description"
-          @select="openCategory(category.id)"
-        >
-          <template #leading>
-            <DifficultyToken :level="category.difficulty" />
-          </template>
-        </InteractiveCard>
-      </div>
-    </section>
+        <div class="m-home__category-list">
+          <InteractiveCard
+            v-for="category in store.categories"
+            :key="category.id"
+            :title="category.title"
+            :copy="category.description"
+            @select="openCategory(category.id)"
+          >
+            <template #leading>
+              <DifficultyToken :level="category.difficulty" />
+            </template>
+          </InteractiveCard>
+        </div>
+      </section>
+    </div>
   </section>
 </template>
 
