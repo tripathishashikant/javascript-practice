@@ -13,10 +13,12 @@ function formatConsoleValue(value) {
   }
 }
 export const useProblemStore = defineStore('problemStore', () => {
-  const displayMode = ref('list');
+  const displayMode = ref('grid');
   const selectedCategoryId = ref(categories[0]?.id ?? '');
   const activeProblemId = ref(categories[0]?.problems[0]?.id ?? '');
   const editorCode = ref(categories[0]?.problems[0]?.starterCode ?? '');
+  const editorPreset = ref('starter');
+  const activeRunId = ref(0);
   const consoleOutput = ref([
     'Console ready.',
     '[Log]: Select a problem and run the current solution.',
@@ -30,6 +32,8 @@ export const useProblemStore = defineStore('problemStore', () => {
   );
 
   function resetEditor(problem = activeProblem.value) {
+    activeRunId.value += 1;
+    editorPreset.value = 'starter';
     editorCode.value = problem?.starterCode ?? '';
     consoleOutput.value = [
       'Console ready.',
@@ -62,13 +66,57 @@ export const useProblemStore = defineStore('problemStore', () => {
   function updateEditorCode(nextValue) {
     editorCode.value = nextValue;
   }
+
+  function loadSolution(problem = activeProblem.value) {
+    activeRunId.value += 1;
+    editorPreset.value = 'solution';
+    if (!problem?.solutionCode) {
+      editorPreset.value = 'starter';
+      consoleOutput.value = ['[Log]: No solution is available for this problem yet.'];
+      return;
+    }
+
+    editorCode.value = problem.solutionCode;
+    consoleOutput.value = ['[Log]: Solution loaded into the editor.'];
+  }
+
+  function toggleSolution(problem = activeProblem.value) {
+    if (editorPreset.value === 'solution') {
+      resetEditor(problem);
+      return;
+    }
+
+    loadSolution(problem);
+  }
   async function runCode() {
+    activeRunId.value += 1;
+    const runId = activeRunId.value;
     const logs = [];
-    const virtualConsole = {
-      log: (...args) => {
-        logs.push(args.map(formatConsoleValue).join(' '));
-      },
+    const asyncGraceMs = 3500;
+    let noOutputTimerId = null;
+
+    const pushLine = (prefix, args) => {
+      if (activeRunId.value !== runId) {
+        return;
+      }
+
+      if (noOutputTimerId) {
+        clearTimeout(noOutputTimerId);
+        noOutputTimerId = null;
+      }
+
+      logs.push(`${prefix}${args.map(formatConsoleValue).join(' ')}`);
+      consoleOutput.value = [...logs];
     };
+
+    const virtualConsole = {
+      log: (...args) => pushLine('', args),
+      info: (...args) => pushLine('[Info]: ', args),
+      warn: (...args) => pushLine('[Warn]: ', args),
+      error: (...args) => pushLine('[Error]: ', args),
+    };
+
+    consoleOutput.value = ['[Log]: Running...'];
 
     try {
       const runner = new Function(
@@ -77,13 +125,38 @@ export const useProblemStore = defineStore('problemStore', () => {
       );
 
       await runner(virtualConsole);
-      consoleOutput.value = logs.length
-        ? logs
-        : ['[Log]: Execution completed with no console output.'];
+
+      if (activeRunId.value !== runId) {
+        return;
+      }
+
+      // If the user code schedules async work (timeouts, un-awaited promises),
+      // logs can arrive after the runner finishes. Keep "Running..." for a
+      // short grace window to avoid flashing a misleading "no output" warning.
+      if (logs.length === 0) {
+        noOutputTimerId = setTimeout(() => {
+          if (activeRunId.value !== runId) {
+            return;
+          }
+
+          if (logs.length === 0) {
+            consoleOutput.value = [
+              '[Log]: Execution completed with no console output.',
+              '[Tip]: If you expected delayed output, make sure your async work is awaited (or log immediately).',
+            ];
+          }
+        }, asyncGraceMs);
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
 
-      consoleOutput.value = [`[Error]: ${message}`];
+      if (activeRunId.value === runId) {
+        if (noOutputTimerId) {
+          clearTimeout(noOutputTimerId);
+        }
+
+        consoleOutput.value = [`[Error]: ${message}`];
+      }
     }
   }
   return {
@@ -92,6 +165,9 @@ export const useProblemStore = defineStore('problemStore', () => {
     consoleOutput,
     displayMode,
     editorCode,
+    editorPreset,
+    loadSolution,
+    toggleSolution,
     resetEditor,
     selectedCategory,
     setDisplayMode,

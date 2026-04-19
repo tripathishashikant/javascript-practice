@@ -1,13 +1,14 @@
-@use './2-utils/variables';
+@use '@/assets/styles/utils/variables';
 
-@use './1-base/reset';
-@use './1-base/globals';
-@use './1-base/typography';
+@use '@/assets/styles/base/reset';
+@use '@/assets/styles/base/globals';
+@use '@/assets/styles/base/typography';
 
-@use './3-layout/app-shell';
+@use '@/assets/styles/layout/app-shell';
 
-@use './4-modules/header';
-@use './4-modules/footer';
-@use './4-modules/home';
-@use './4-modules/concept';
-@use './4-modules/problem-workspace';
+@use '@/assets/styles/modules/nav';
+@use '@/assets/styles/modules/header';
+@use '@/assets/styles/modules/footer';
+@use '@/assets/styles/modules/home';
+@use '@/assets/styles/modules/concept';
+@use '@/assets/styles/modules/problem-workspace';

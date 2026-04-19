@@ -24,3 +24,6 @@ src/data/*.js
 src/data/*.js.map
 src/types/*.js
 src/types/*.js.map
+
+# build files
+dist/

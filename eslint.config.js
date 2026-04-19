@@ -9,6 +9,9 @@ export default [
     ignores: [
       'dist/**',
       'node_modules/**',
+      'src/assets/problems/promise/**/*.js',
+      'src/assets/problems/templateTags/**/*.js',
+      // Legacy paths (kept temporarily because Windows is blocking deletion).
       'src/assets/promise/**/*.js',
       'src/assets/templateTags/**/*.js',
     ],

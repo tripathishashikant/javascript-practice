@@ -1,13 +1,30 @@
+@use '@/assets/styles/utils/variables' as *;
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: $font-mono;
+  font-size: 0.9375rem;
+  font-weight: 400;
 }
 
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
+  color: $color-text-high;
+  font-family: $font-mono;
   line-height: 1.1;
 }
 
-p {
-  color: var(--color-text-muted);
+p,
+span,
+li,
+label,
+code,
+pre {
+  color: $color-text-med;
+  font-family: $font-mono;
+  font-size: 0.9375rem;
+  font-weight: 400;
 }

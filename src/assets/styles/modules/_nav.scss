@@ -1,0 +1,88 @@
+@use '@/assets/styles/utils/variables' as *;
+
+.c-logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 0.95;
+  text-decoration: none;
+  text-shadow: 0 0 22px rgba(160, 207, 255, 0.08);
+  transition: opacity $transition-soft;
+}
+
+.c-logo:hover {
+  opacity: 0.92;
+}
+
+.c-logo__base {
+  color: $color-accent-white;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.c-logo__accent {
+  color: $color-text-high;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.c-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.c-nav__link,
+.c-nav__icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  color: $color-text-med;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  transition:
+    color $transition-soft,
+    transform $transition-soft,
+    box-shadow $transition-soft,
+    background-color $transition-soft;
+}
+
+.c-nav__icon-link {
+  padding: 0.55rem;
+}
+
+.c-nav__link:hover,
+.c-nav__icon-link:hover {
+  color: $color-text-high;
+  transform: translateY(-1px);
+}
+
+.c-nav__link.is-active {
+  color: $color-accent-white;
+  background: rgba(160, 207, 255, 0.08);
+  box-shadow: 0 0 0 1px rgba(160, 207, 255, 0.22);
+}
+
+.c-nav--footer {
+  justify-content: flex-start;
+}
+
+@media (max-width: 720px) {
+  .c-nav {
+    justify-content: flex-start;
+  }
+
+  .c-logo {
+    font-size: 3rem;
+  }
+}

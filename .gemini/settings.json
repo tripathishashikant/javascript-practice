@@ -1,0 +1,45 @@
+{
+  "hooks": {
+    "BeforeTool": [
+      {
+        "matcher": "write_file|replace|run_shell_command",
+        "hooks": [
+          {
+            "name": "file-protection",
+            "type": "command",
+            "command": "node .gemini/hooks/pre-tool-protect.cjs"
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "write_file|replace",
+        "hooks": [
+          {
+            "name": "auto-commit",
+            "type": "command",
+            "command": "node .gemini/hooks/post-tool-commit.cjs"
+          },
+          {
+            "name": "ui-screenshot",
+            "type": "command",
+            "command": "node .gemini/hooks/post-tool-screenshot.cjs"
+          }
+        ]
+      }
+    ],
+    "AfterAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "task-notification",
+            "type": "command",
+            "command": "node .gemini/hooks/post-agent-notify.cjs"
+          }
+        ]
+      }
+    ]
+  }
+}
