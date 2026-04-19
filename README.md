@@ -23,7 +23,7 @@ The long-term goal is to create a JavaScript practice website that allows learne
 - run code and inspect output
 - start fresh on reload without saving temporary edits
 
-The intended visual direction is a glassmorphism-inspired interface.
+The intended visual direction is a clean and focused interface optimized for interactive learning.
 
 ## Current Structure
 

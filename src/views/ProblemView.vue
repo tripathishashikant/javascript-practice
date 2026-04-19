@@ -72,6 +72,9 @@
           <div class="m-problem-workspace__console-header">
             <h3>Execution Console</h3>
             <div class="m-problem-workspace__console-actions">
+              <button class="m-problem-workspace__run" type="button" @click="store.runCode">
+                RUN CODE
+              </button>
               <button
                 class="m-problem-workspace__solution"
                 type="button"
@@ -81,9 +84,6 @@
                 <RotateCcw v-if="isSolutionLoaded" :size="16" />
                 <FileDown v-else :size="16" />
                 <span>{{ isSolutionLoaded ? 'RESTORE STARTER' : 'LOAD SOLUTION' }}</span>
-              </button>
-              <button class="m-problem-workspace__run" type="button" @click="store.runCode">
-                RUN CODE
               </button>
             </div>
           </div>
