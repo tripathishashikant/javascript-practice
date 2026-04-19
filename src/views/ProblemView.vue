@@ -72,6 +72,7 @@
           <div class="m-problem-workspace__console-header">
             <h3>Execution Console</h3>
             <div class="m-problem-workspace__console-actions">
+              <!-- Reordered buttons: Run Code first -->
               <button class="m-problem-workspace__run" type="button" @click="store.runCode">
                 RUN CODE
               </button>
